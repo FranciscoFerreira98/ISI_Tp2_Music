@@ -17,6 +17,8 @@ namespace ISI_Tp2
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +29,15 @@ namespace ISI_Tp2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:8081"
+                            );
+                    });
+            });
             services.AddSingleton<IMusicRepository, MusicRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -40,13 +51,14 @@ namespace ISI_Tp2
         {
             if (env.IsDevelopment())
             {
+               
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ISI_Tp2 v1"));
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseRouting();
 
             app.UseAuthorization();

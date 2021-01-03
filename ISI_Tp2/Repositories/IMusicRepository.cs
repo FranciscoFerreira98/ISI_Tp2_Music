@@ -7,5 +7,7 @@ namespace ISI_Tp2.Repositories
     {
         List<Track> GetTracksByName(string name);
         Track GetFromSpotify(string name);
+        bool DeleteTrackById(int id);
+        List<Track> GetAllTracks();
     }
 }

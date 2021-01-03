@@ -23,27 +23,27 @@ namespace ISI_Tp2.Repositories
         {
             _configuration = configuration;
             httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",_configuration["SpotifyToken"]);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SpotifyToken"]);
         }
 
         public List<Track> GetTracksByName(string name)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
             {
-                using (SqlCommand command = new SqlCommand("dbo.SearchTrackByName",connection))
+                using (SqlCommand command = new SqlCommand("dbo.SearchTrackByName", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Name", name);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-                    List<Track> tracks = new List<Track>(); 
+                    List<Track> tracks = new List<Track>();
                     while (reader.Read())
                     {
                         tracks.Add(new Track
                         {
                             Album = reader.GetString(0),
                             //se for null retorna null se não for null retorna appleURL
-                            AppleUrl = reader.IsDBNull(1)?null:reader.GetString(1),
+                            AppleUrl = reader.IsDBNull(1) ? null : reader.GetString(1),
                             SpotifyUrl = reader.IsDBNull(2) ? null : reader.GetString(2),
                             Artist = reader.GetString(3),
                             Image = reader.GetString(4),
@@ -71,7 +71,7 @@ namespace ISI_Tp2.Repositories
             Track track = new Track
             {
                 Album = spotifyMusic.tracks.items[0].album.name,
-                SpotifyUrl = spotifyMusic.tracks.items[0].album.external_urls.spotify,
+                SpotifyUrl = spotifyMusic.tracks.items[0].external_urls.spotify,
                 Artist = spotifyMusic.tracks.items[0].album.artists[0].name,
                 Image = spotifyMusic.tracks.items[0].album.images[0].url,
                 Name = spotifyMusic.tracks.items[0].name,
@@ -83,7 +83,7 @@ namespace ISI_Tp2.Repositories
                 using (SqlCommand command = new SqlCommand("dbo.InsertTrack", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Album", track.Album);
+                    command.Parameters.AddWithValue("@Album", track);
                     command.Parameters.AddWithValue("@SpotifyUrl", track.SpotifyUrl);
                     command.Parameters.AddWithValue("@Artist", track.Artist);
                     command.Parameters.AddWithValue("@Image", track.Image);
@@ -96,5 +96,52 @@ namespace ISI_Tp2.Repositories
 
             return track;
         }
+
+        public bool DeleteTrackById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.DeleteTrackById", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    return true;
+                }
+            }
+        }
+        public List<Track> GetAllTracks()
+        {
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.GetAllTracks", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    List<Track> tracks = new List<Track>();
+                    while (reader.Read())
+                    {
+                        tracks.Add(new Track
+                        {
+                            IdTrack = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Image = reader.GetString(2),
+                            Artist = reader.GetString(3),
+                            Album = reader.GetString(4),
+                            //se for null retorna null se não for null retorna appleURL
+                            SpotifyId = reader.IsDBNull(5) ? null : reader.GetString(5),
+                            SpotifyUrl = reader.IsDBNull(6) ? null : reader.GetString(6),
+                            AppleId = reader.IsDBNull(7) ? null : reader.GetString(7),
+                            AppleUrl = reader.IsDBNull(8) ? null : reader.GetString(8)
+                            
+                        });
+                    }
+                    return tracks;
+                }
+            }
+        }
+
     }
 }

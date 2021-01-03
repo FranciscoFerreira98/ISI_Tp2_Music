@@ -26,7 +26,7 @@ namespace ISI_Tp2.Models
     public class Album
     {
         public List<Artist> artists { get; set; }
-        public ExternalUrls external_urls { get; set; }
+        
         public string id { get; set; }
         public List<Image> images { get; set; }
         public string name { get; set; }
@@ -36,6 +36,7 @@ namespace ISI_Tp2.Models
     {
         public Album album { get; set; }
         public string name { get; set; }
+        public ExternalUrls external_urls { get; set; }
     }
 
     public class Tracks
