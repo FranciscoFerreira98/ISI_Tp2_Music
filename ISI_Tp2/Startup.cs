@@ -35,7 +35,7 @@ namespace ISI_Tp2
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:8081"
-                            );
+                        ).AllowAnyMethod().AllowAnyHeader();
                     });
             });
             services.AddSingleton<IMusicRepository, MusicRepository>();

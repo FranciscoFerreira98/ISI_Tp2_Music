@@ -56,6 +56,39 @@ namespace ISI_Tp2.Repositories
                 }
             }
         }
+        public List<Track> GetTracksById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.SearchTrackById", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    List<Track> tracks = new List<Track>();
+                    while (reader.Read())
+                    {
+                        tracks.Add(new Track
+                        {
+                            IdTrack = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Image = reader.GetString(2),
+                            Artist = reader.GetString(3),
+                            Album = reader.GetString(4),
+                            //se for null retorna null se não for null retorna appleURL
+                            SpotifyId = reader.IsDBNull(5) ? null : reader.GetString(5),
+                            SpotifyUrl = reader.IsDBNull(6) ? null : reader.GetString(6),
+                            AppleId = reader.IsDBNull(7) ? null : reader.GetString(7),
+                            AppleUrl = reader.IsDBNull(8) ? null : reader.GetString(8)
+
+                        });
+                    }
+
+                    return tracks;
+                }
+            }
+        }
 
         public Track GetFromSpotify(string name)
         {
@@ -83,7 +116,7 @@ namespace ISI_Tp2.Repositories
                 using (SqlCommand command = new SqlCommand("dbo.InsertTrack", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Album", track);
+                    command.Parameters.AddWithValue("@Album", track.Album);
                     command.Parameters.AddWithValue("@SpotifyUrl", track.SpotifyUrl);
                     command.Parameters.AddWithValue("@Artist", track.Artist);
                     command.Parameters.AddWithValue("@Image", track.Image);
@@ -139,6 +172,26 @@ namespace ISI_Tp2.Repositories
                         });
                     }
                     return tracks;
+                }
+            }
+        }
+        public bool UpdateTrackById(int id, string name, string image, string artist, string album, string spotifyId, string spotifyUrl)
+        {
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.UpdateTrackById", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.Parameters.AddWithValue("@Image", image);
+                    command.Parameters.AddWithValue("@Artist", artist);
+                    command.Parameters.AddWithValue("@Album", album);
+                    command.Parameters.AddWithValue("@SpotifyId", spotifyId);
+                    command.Parameters.AddWithValue("@SpotifyUrl", spotifyUrl);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    return true;
                 }
             }
         }
