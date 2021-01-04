@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/ISITp2api/apis/ISITp2",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/isimusicdb/databases/MusicDb",
+      "type": "mssql.azure",
+      "connectionId": "MusicDb",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
