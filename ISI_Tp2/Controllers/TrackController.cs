@@ -56,13 +56,6 @@ namespace ISI_Tp2.Controllers
             return true;
         }
 
-        [HttpGet("searchTracks")]
-        public List<Track> GetAllTracks()
-        {
-            List<Track> tracks = _repo.GetAllTracks();
-            return tracks;
-        }
-
         [HttpPost("searchTracks")]
         public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string apple_id, string apple_url)
         {
