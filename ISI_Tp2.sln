@@ -7,25 +7,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISI_Tp2", "ISI_Tp2\ISI_Tp2.
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ISI_MusicDb", "ISI_MusicDb\ISI_MusicDb.sqlproj", "{82D0E3D8-C6B0-4FA0-9C69-9ECA813C20EB}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ISI", "..\..\..\Desktop\ISI\", "{660211F4-59BF-410D-A2C7-86FDA26A2E88}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ISI(1)", "ISI\", "{1FFFE60B-4B41-4637-B428-67C6ACEB8A16}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_56547"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\Desktop\ISI\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56547\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_57802"
+		Debug.AspNetCompiler.PhysicalPath = "ISI\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57802\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_56547"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\Desktop\ISI\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56547\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_57802"
+		Release.AspNetCompiler.PhysicalPath = "ISI\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57802\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "56547"
-		SlnRelativePath = "..\..\..\Desktop\ISI\"
+		VWDPort = "57802"
+		SlnRelativePath = "ISI\"
 	EndProjectSection
 EndProject
 Global
@@ -44,10 +44,10 @@ Global
 		{82D0E3D8-C6B0-4FA0-9C69-9ECA813C20EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82D0E3D8-C6B0-4FA0-9C69-9ECA813C20EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82D0E3D8-C6B0-4FA0-9C69-9ECA813C20EB}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{660211F4-59BF-410D-A2C7-86FDA26A2E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{660211F4-59BF-410D-A2C7-86FDA26A2E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{660211F4-59BF-410D-A2C7-86FDA26A2E88}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{660211F4-59BF-410D-A2C7-86FDA26A2E88}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{1FFFE60B-4B41-4637-B428-67C6ACEB8A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FFFE60B-4B41-4637-B428-67C6ACEB8A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FFFE60B-4B41-4637-B428-67C6ACEB8A16}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FFFE60B-4B41-4637-B428-67C6ACEB8A16}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
