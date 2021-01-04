@@ -196,5 +196,28 @@ namespace ISI_Tp2.Repositories
             }
         }
 
+        public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string apple_id, string apple_url)
+        {
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.InsertTrackAdmin", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.Parameters.AddWithValue("@Iamge", image);
+                    command.Parameters.AddWithValue("@Artist", artist);
+                    command.Parameters.AddWithValue("@Album", album);
+                    command.Parameters.AddWithValue("@Spoty_Id", spoty_id);
+                    command.Parameters.AddWithValue("@Spoty_Url", spoty_url);
+                    command.Parameters.AddWithValue("@Apple_Id", apple_id);
+                    command.Parameters.AddWithValue("@Apple_Url", apple_url);
+
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    return true;
+                }
+            }
+        }
+
     }
 }
