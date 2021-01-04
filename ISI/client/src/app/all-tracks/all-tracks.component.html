@@ -1,0 +1,8 @@
+<div class="col-md-6">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let trackss of tracks; let i = index" [class.active]="i == currentIndex"
+        (click)="setActiveTrack(trackss, i)">
+        {{ trackss.name }}
+      </li>
+    </ul>
+  </div>

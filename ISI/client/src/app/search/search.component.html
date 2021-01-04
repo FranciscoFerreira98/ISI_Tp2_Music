@@ -1,0 +1,21 @@
+<!-- Search form -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="input-group  ">
+      <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="track" />
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="searchTrack()">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let trackss of tracks; let i = index" [class.active]="i == currentIndex"
+        (click)="setActiveTrack(trackss, i)">
+        <img class="capaMusica" src={{trackss.image}}  style="width:30px;height:30px;" alt=""> {{ trackss.name }} 
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="row marTopAcc">
+    <div class="col-md-7">
+      <input type="text" class="form-control" placeholder="Procurar pelo nome" [(ngModel)]="track" />
+    </div>
+    <div class="col-md-4">
+      <div class="input-group-append ">
+        <button class="btn btn-outline-secondary btnAcconunt" type="button" (click)="searchTrack()">
+          Search
+        </button>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="col-md-7">
+
+
+
+      <h4>Lista de Musicas</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let trackss of tracks | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" [class.active]="i == currentIndex"
+        (click)="setActiveTrack(trackss, i)">
+        <img class="capaMusica" src={{trackss.image}}  style="width:30px;height:30px;" alt=""> {{ trackss.name }} 
+      </li>
+      </ul>
+      <br>
+      <pagination-controls  class="pagination" (pageChange)="p = $event"></pagination-controls>
+      <br>
+      <!-- <button class="btn btn-sm btn-danger" (click)="removeAllTutorials()">
+        Remove All
+      </button> -->
+    </div>
+    <div class="col-md-5">
+      <div *ngIf="currentTrack">
+        <h4>Informaçoes</h4>
+        <div>
+          <label><strong>Nome da musica:</strong></label> {{ currentTrack.name }}
+        </div>
+        <div>
+          <label><strong>Artista:</strong></label>
+          {{ currentTrack.artist }}
+        </div>
+        <div>
+          <label><strong>Spotify link: </strong></label>
+          <a href={{currentTrack.spotifyUrl}}>Spotify</a>
+         
+        </div>
+
+        <a class="badge badge-warning" href="/edit/{{currentTrack.idTrack }}">
+          Edit
+        </a>
+      </div>
+
+    </div>
+  </div>
