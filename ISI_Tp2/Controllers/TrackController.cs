@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace ISI_Tp2.Controllers
 {
+    [Route("api/[controller]")]
     public class TrackController : ControllerBase
     {
         public TrackController(IMusicRepository repository)
@@ -19,14 +20,14 @@ namespace ISI_Tp2.Controllers
         private readonly IMusicRepository _repo;
 
 
-        [HttpGet("searchTracks")]
+        [HttpGet]
         public List<Track> GetAllTracks()
         {
             List<Track> tracks = _repo.GetAllTracks();
             return tracks;
         }
 
-        [HttpGet("searchTracks/{name}")]
+        [HttpGet("{name}")]
         public List<Track> SearchTracks(string name)
         {
             List<Track> tracks = _repo.GetTracksByName(name);
@@ -36,38 +37,36 @@ namespace ISI_Tp2.Controllers
             }
             return tracks;
         }
-        [HttpGet("searchTracksById/{id}")]
+
+        [HttpGet("id/{id}")]
         public List<Track> GetTracksById(int id)
         {
             List<Track> tracks = _repo.GetTracksById(id);
             return tracks;
         }
 
-        [HttpPut("updateTrack")]
+        [HttpPost]
+        public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string apple_id, string apple_url)
+        {
+            _repo.InsertTrack(name, image, artist, album, spoty_id, spoty_url, apple_id, apple_url);
+            return true;
+        }
+
+        [HttpPut]
         public bool UpdateTrackById([FromBody]InputTrack input)
         {
             _repo.UpdateTrackById(input.IdTrack,input.Name,input.Image,input.Artist,input.Album,input.SpotifyId,input.SpotifyUrl);
             return true;
         }
-        [HttpDelete("deleteTrack/{id}")]
+
+        [HttpDelete("{id}")]
         public bool DeleteTrackById(int id)
         {
             _repo.DeleteTrackById(id);
             return true;
         }
 
-        [HttpGet("searchTracks")]
-        public List<Track> GetAllTracks()
-        {
-            List<Track> tracks = _repo.GetAllTracks();
-            return tracks;
-        }
 
-        [HttpPost("searchTracks")]
-        public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string apple_id, string apple_url)
-        {
-            _repo.InsertTrack(name, image, artist, album, spoty_id, spoty_url, apple_id, apple_url);
-            return true;
-        }
+        
     }
 }

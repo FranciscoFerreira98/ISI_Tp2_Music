@@ -3,10 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Track } from 'src/app/models/track.model';
 
-const baseURL = "https://localhost:44306/searchTracks"
-const searchById = "https://localhost:44306/searchTracksById"
-const deleteTrackId= "https://localhost:44306/deleteTrack"
-const UpdateTrackId= "https://localhost:44306/updateTrack"
+const baseURL = "https://localhost:44306/api/Track"
+const searchUrl = "https://localhost:44306/api/Track/id"
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,13 +20,13 @@ export class TrackService {
     return this.http.get(`${baseURL}`);
   }
   get(id: any): Observable<Track>{
-    return this.http.get(`${searchById}/${id}`);
+    return this.http.get(`${searchUrl}/${id}`);
   }
   delete(id: any) : Observable<any> {
-    return this.http.delete(`${deleteTrackId}/${id}`);
+    return this.http.delete(`${baseURL}/${id}`);
   }
 
   update(data: any): Observable<any> {
-    return this.http.put(`${UpdateTrackId}`, data);
+    return this.http.put(`${baseURL}`, data);
   }
 }
