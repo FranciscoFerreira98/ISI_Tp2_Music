@@ -14,5 +14,7 @@ namespace ISI_Tp2.Repositories
 
         bool UpdateTrackById(int id, string name, string image, string artist, string album, string spotifyId,
             string spotifyUrl);
+
+        Track GetFromYoutube(int id, string name);
     }
 }

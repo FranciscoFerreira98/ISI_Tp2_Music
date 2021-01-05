@@ -1,4 +1,5 @@
 <div class="row marTopAcc">
+  <div class="row ">
     <div class="col-md-7">
       <input type="text" class="form-control" placeholder="Procurar pelo nome" [(ngModel)]="track" />
     </div>
@@ -10,22 +11,22 @@
       </div>
 
     </div>
-    <br>
-    <br>
-    <br>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="row">
     <div class="col-md-7">
-
-
-
       <h4>Lista de Musicas</h4>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let trackss of tracks | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" [class.active]="i == currentIndex"
-        (click)="setActiveTrack(trackss, i)">
-        <img class="capaMusica" src={{trackss.image}}  style="width:30px;height:30px;" alt=""> {{ trackss.name }} 
-      </li>
+        <li class="list-group-item"
+          *ngFor="let trackss of tracks | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+          [class.active]="i == currentIndex" (click)="setActiveTrack(trackss, i)">
+          <img class="capaMusica" src={{trackss.image}} style="width:30px;height:30px;" alt=""> {{ trackss.name }}
+        </li>
       </ul>
       <br>
-      <pagination-controls  class="pagination" (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
       <br>
       <!-- <button class="btn btn-sm btn-danger" (click)="removeAllTutorials()">
         Remove All
@@ -33,24 +34,31 @@
     </div>
     <div class="col-md-5">
       <div *ngIf="currentTrack">
-        <h4>Informaçoes</h4>
-        <div>
-          <label><strong>Nome da musica:</strong></label> {{ currentTrack.name }}
+        <div class="globalFooterCard">
+          <h4>Informações</h4>
+          <div>
+            <label><strong>Id da musica:</strong></label>
+            {{ currentTrack.idTrack }}
+          </div>
+          <div>
+            <label><strong>Nome da musica:</strong></label> {{ currentTrack.name }}
+          </div>
+          <div>
+            <label><strong>Artista:</strong></label>
+            {{ currentTrack.artist }}
+          </div>
+          <div>
+           
+            <a  target="_blank" href={{currentTrack.spotifyUrl}}><img class="spotifyImg" src="https://logodownload.org/wp-content/uploads/2020/03/listen-on-spotify.png"  alt="" srcset=""></a>
+            <a  target="_blank" href={{currentTrack.youtubeUrl}}><img class="spotifyImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1200px-YouTube_Logo_2017.svg.png"  alt="" srcset=""></a>
+            
+          </div>
+          <br><br>
+          <a class="btn btn-warning" href="/edit/{{currentTrack.idTrack }}">
+            Edit
+          </a>
         </div>
-        <div>
-          <label><strong>Artista:</strong></label>
-          {{ currentTrack.artist }}
-        </div>
-        <div>
-          <label><strong>Spotify link: </strong></label>
-          <a href={{currentTrack.spotifyUrl}}>Spotify</a>
-         
-        </div>
-
-        <a class="badge badge-warning" href="/edit/{{currentTrack.idTrack }}">
-          Edit
-        </a>
       </div>
-
     </div>
   </div>
+</div>

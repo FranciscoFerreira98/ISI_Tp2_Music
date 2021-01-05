@@ -1,7 +1,18 @@
 <div *ngIf="currentTrack[0].idTrack" class="edit-form">
-  <h2></h2>
   <div class="row">
     <div class="col-md-6">
+      <h1>{{currentTrack[0].name  + ' - ' + currentTrack[0].artist}}</h1>
+    </div>
+    <div class="col-md-6">
+      <a target="_blank" href={{currentTrack[0].spotifyUrl}}><img class="spotifyImg"
+          src="https://logodownload.org/wp-content/uploads/2020/03/listen-on-spotify.png" alt="" srcset=""></a>
+      <a target="_blank" href={{currentTrack[0].youtubeUrl}}><img class="spotifyImg"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1200px-YouTube_Logo_2017.svg.png"
+          alt="" srcset=""></a>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-md-6 globalFooterCard">
       <form>
         <div class="row">
           <div class="form-group col-md-12">
@@ -32,12 +43,26 @@
         <div class="row">
           <div class="form-group col-md-6">
             <label for="spotifyId">Spotify Id</label>
-            <input type="text" class="form-control" id="spotifyId" [(ngModel)]="currentTrack[0].spotifyId" name="spotifyId" />
+            <input type="text" class="form-control" id="spotifyId" [(ngModel)]="currentTrack[0].spotifyId"
+              name="spotifyId" />
           </div>
 
           <div class="form-group  col-md-6">
             <label for="spotifyUrl">Spotify Url</label>
             <input type="text" class="form-control" id="spotifyUrl" [(ngModel)]="currentTrack[0].spotifyUrl"
+              name="spotifyUrl" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="spotifyId">Spotify Id</label>
+            <input type="text" class="form-control" id="spotifyId" [(ngModel)]="currentTrack[0].youtubeId"
+              name="spotifyId" />
+          </div>
+
+          <div class="form-group  col-md-6">
+            <label for="spotifyUrl">Spotify Url</label>
+            <input type="text" class="form-control" id="spotifyUrl" [(ngModel)]="currentTrack[0].youtubeUrl"
               name="spotifyUrl" />
           </div>
         </div>
@@ -55,7 +80,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 ">
       <img class="capaMusica" src={{currentTrack[0].image}} style="width:50%;" alt="">
     </div>
   </div>

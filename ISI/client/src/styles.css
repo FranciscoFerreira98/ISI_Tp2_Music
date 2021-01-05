@@ -1,4 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  font-family: 'Roboto', sans-serif !important;
+}
+.spotifyImg{
+  width: 20%;
+  margin-right: 5%;
+}
 .my-pagination /deep/ .ngx-pagination .current {
     background: red;
   }
+  a.globalFooterCard,
+div.globalFooterCard {
+  -webkit-box-flex: 1;
+  margin-top: 15px;
+  z-index: 499;
+  z-index: calc(500 - 1);
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 40px 40px 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 13px 27px -5px rgba(50, 50, 93, .25), 0 8px 16px -8px rgba(0, 0, 0, .3), 0 -6px 16px -6px rgba(0, 0, 0, .025);
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, .25), 0 8px 16px -8px rgba(0, 0, 0, .3), 0 -6px 16px -6px rgba(0, 0, 0, .025);
+  -webkit-transition-property: color, background-color, -webkit-box-shadow, -webkit-transform;
+  transition-property: color, background-color, -webkit-box-shadow, -webkit-transform;
+  transition-property: color, background-color, box-shadow, transform;
+  transition-property: color, background-color, box-shadow, transform, -webkit-box-shadow, -webkit-transform;
+  -webkit-transition-duration: .15s;
+  transition-duration: .15s;
+  text-decoration: none !important;
+}
+
+a.globalFooterCard:active,
+a.globalFooterCard:hover,
+div.globalFooterCard:active,
+div.globalFooterCard:hover {
+  -webkit-box-shadow: 0 30px 60px -12px rgba(50, 50, 93, .25), 0 18px 36px -18px rgba(0, 0, 0, .3), 0 -12px 36px -8px rgba(0, 0, 0, .025);
+  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, .25), 0 18px 36px -18px rgba(0, 0, 0, .3), 0 -12px 36px -8px rgba(0, 0, 0, .025);
+}
+
+a.globalFooterCard:hover,
+div.globalFooterCard:hover {
+  color: #32325d !important;
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+a.globalFooterCard h2,
+div.globalFooterCard h2 {
+  margin: 0 0 5px;
+  white-space: normal;
+  text-decoration: none;
+}
+a.globalFooterCard p,
+div.globalFooterCard p {
+  margin: 5px 0 0;
+  text-decoration: none;
+}

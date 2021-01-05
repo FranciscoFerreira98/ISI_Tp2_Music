@@ -26,7 +26,7 @@ namespace ISI_Tp2.Controllers
             List<Track> tracks = _repo.GetAllTracks();
             return tracks;
         }
-
+        
         [HttpGet("{name}")]
         public List<Track> SearchTracks(string name)
         {
@@ -34,6 +34,9 @@ namespace ISI_Tp2.Controllers
             if (tracks.Count == 0)
             {
                 tracks.Add(_repo.GetFromSpotify(name));
+                Track trackYoutube = _repo.GetFromYoutube(tracks[0].IdTrack, name);
+                tracks[0].YoutubeUrl = trackYoutube.YoutubeUrl;
+                tracks[0].YoutubeId = trackYoutube.YoutubeId;
             }
             return tracks;
         }
@@ -53,9 +56,9 @@ namespace ISI_Tp2.Controllers
         }
 
         [HttpPut]
-        public bool UpdateTrackById([FromBody]InputTrack input)
+        public bool UpdateTrackById([FromBody] InputTrack input)
         {
-            _repo.UpdateTrackById(input.IdTrack,input.Name,input.Image,input.Artist,input.Album,input.SpotifyId,input.SpotifyUrl);
+            _repo.UpdateTrackById(input.IdTrack, input.Name, input.Image, input.Artist, input.Album, input.SpotifyId, input.SpotifyUrl);
             return true;
         }
 
@@ -67,8 +70,8 @@ namespace ISI_Tp2.Controllers
         }
 
 
-        
 
-       
+
+
     }
 }

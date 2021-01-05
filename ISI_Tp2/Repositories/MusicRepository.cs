@@ -17,13 +17,15 @@ namespace ISI_Tp2.Repositories
     public class MusicRepository : IMusicRepository
     {
         private readonly IConfiguration _configuration;
-        private readonly HttpClient httpClient;
-
+        private readonly HttpClient httpClientSpotify;
+        private readonly HttpClient httpClientYoutube;
         public MusicRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SpotifyToken"]);
+            httpClientSpotify = new HttpClient();
+            httpClientYoutube = new HttpClient();
+            httpClientSpotify.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SpotifyToken"]);
+            //httpClientYoutube.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["YoutubeApiKey"]);
         }
 
         public List<Track> GetTracksByName(string name)
@@ -42,12 +44,13 @@ namespace ISI_Tp2.Repositories
                         tracks.Add(new Track
                         {
                             Album = reader.GetString(0),
-                            //se for null retorna null se não for null retorna appleURL
-                            AppleUrl = reader.IsDBNull(1) ? null : reader.GetString(1),
+                            //se for null retorna null se não for null retorna YoutubeUrl
+                            YoutubeUrl = reader.IsDBNull(1) ? null : reader.GetString(1),
                             SpotifyUrl = reader.IsDBNull(2) ? null : reader.GetString(2),
                             Artist = reader.GetString(3),
                             Image = reader.GetString(4),
                             Name = reader.GetString(5),
+                            IdTrack = reader.GetInt32(6)
 
                         });
                     }
@@ -76,11 +79,11 @@ namespace ISI_Tp2.Repositories
                             Image = reader.GetString(2),
                             Artist = reader.GetString(3),
                             Album = reader.GetString(4),
-                            //se for null retorna null se não for null retorna appleURL
+                            //se for null retorna null se não for null retorna YoutubeUrl
                             SpotifyId = reader.IsDBNull(5) ? null : reader.GetString(5),
                             SpotifyUrl = reader.IsDBNull(6) ? null : reader.GetString(6),
-                            AppleId = reader.IsDBNull(7) ? null : reader.GetString(7),
-                            AppleUrl = reader.IsDBNull(8) ? null : reader.GetString(8)
+                            YoutubeId = reader.IsDBNull(7) ? null : reader.GetString(7),
+                            YoutubeUrl = reader.IsDBNull(8) ? null : reader.GetString(8)
 
                         });
                     }
@@ -90,9 +93,48 @@ namespace ISI_Tp2.Repositories
             }
         }
 
+        public Track GetFromYoutube(int id, string name)
+        {
+            var response = httpClientYoutube
+                .GetAsync(
+                    "https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q=" + name + "&key=" + _configuration["YoutubeApiKey"])
+                .Result;
+            string res = "";
+            using (HttpContent content = response.Content)
+            {
+                Task<string> resulTask = content.ReadAsStringAsync();
+                res = resulTask.Result;
+            }
+            YoutubeMusic youtubeMusic = JsonConvert.DeserializeObject<YoutubeMusic>(res);
+
+            Track track = new Track
+            {
+                YoutubeId = youtubeMusic.items[0].id.videoId,
+                YoutubeUrl = "https://www.youtube.com/watch?v=" + youtubeMusic.items[0].id.videoId,
+
+
+            };
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.InsertYoutubeToMusic", connection))
+                {
+                    connection.Open();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@YoutubeId", track.YoutubeId);
+                    command.Parameters.AddWithValue("@YoutubeUrl", track.YoutubeUrl);
+
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            return track;
+        }
+
         public Track GetFromSpotify(string name)
         {
-            var response = httpClient.GetAsync("https://api.spotify.com/v1/search?type=track&q=" + name).Result;
+            var response = httpClientSpotify.GetAsync("https://api.spotify.com/v1/search?type=track&q=" + name).Result;
             string res = "";
             using (HttpContent content = response.Content)
             {
@@ -122,8 +164,18 @@ namespace ISI_Tp2.Repositories
                     command.Parameters.AddWithValue("@Image", track.Image);
                     command.Parameters.AddWithValue("@Name", track.Name);
                     command.Parameters.AddWithValue("@SpotifyId", track.SpotifyId);
+
+
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    SqlDataReader reader = command.ExecuteReader();
+                  
+                    while (reader.Read())
+                    {
+
+                        track.IdTrack = reader.GetInt32(0);
+
+                    }
+
                 }
             }
 
@@ -163,11 +215,11 @@ namespace ISI_Tp2.Repositories
                             Image = reader.GetString(2),
                             Artist = reader.GetString(3),
                             Album = reader.GetString(4),
-                            //se for null retorna null se não for null retorna appleURL
+                            //se for null retorna null se não for null retorna YoutubeUrl
                             SpotifyId = reader.IsDBNull(5) ? null : reader.GetString(5),
                             SpotifyUrl = reader.IsDBNull(6) ? null : reader.GetString(6),
-                            AppleId = reader.IsDBNull(7) ? null : reader.GetString(7),
-                            AppleUrl = reader.IsDBNull(8) ? null : reader.GetString(8)
+                            YoutubeId = reader.IsDBNull(7) ? null : reader.GetString(7),
+                            YoutubeUrl = reader.IsDBNull(8) ? null : reader.GetString(8)
                             
                         });
                     }
@@ -196,7 +248,7 @@ namespace ISI_Tp2.Repositories
             }
         }
 
-        public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string apple_id, string apple_url)
+        public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string youtube_id, string youtube_url)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
             {
@@ -209,8 +261,8 @@ namespace ISI_Tp2.Repositories
                     command.Parameters.AddWithValue("@Album", album);
                     command.Parameters.AddWithValue("@SpotifyId", spoty_id);
                     command.Parameters.AddWithValue("@SpotifyUrl", spoty_url);
-                    command.Parameters.AddWithValue("@AppleId", apple_id);
-                    command.Parameters.AddWithValue("@AppleUrl", apple_url);
+                    command.Parameters.AddWithValue("@YoutubeId", youtube_id);
+                    command.Parameters.AddWithValue("@YoutubeUrl", youtube_url);
 
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();

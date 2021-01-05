@@ -6,4 +6,6 @@ export class Track {
     album?: string;
     spotifyId?: string;
     spotifyUrl?: string;
+    youtubeId?: string;
+    youtubeUrl?: string;
   }

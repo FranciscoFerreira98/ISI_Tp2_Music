@@ -16,7 +16,9 @@ export class EditComponent implements OnInit {
     artist: '',
     album: '',
     spotifyId: '',
-    spotifyUrl: ''
+    spotifyUrl: '',
+    youtubeId:'',
+    youtubeUrl:'',
 
   }
   currentIndex = -1;
