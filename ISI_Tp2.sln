@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISI_Tp2", "ISI_Tp2\ISI_Tp2.csproj", "{9AEFD124-04EB-48D2-AC8E-D87EC0565F2E}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ISI", "ISI\", "{1FFFE60B-4B41-4637-B428-67C6ACEB8A16}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ISI(1)", "ISI\", "{1FFFE60B-4B41-4637-B428-67C6ACEB8A16}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57802"
