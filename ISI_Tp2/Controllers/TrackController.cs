@@ -49,16 +49,16 @@ namespace ISI_Tp2.Controllers
         }
 
         [HttpPost]
-        public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string apple_id, string apple_url)
+        public bool InsertTrack([FromBody] InputTrack input)
         {
-            _repo.InsertTrack(name, image, artist, album, spoty_id, spoty_url, apple_id, apple_url);
+            _repo.InsertTrack(input.Name, input.Image, input.Artist, input.Album, input.SpotifyId, input.SpotifyUrl, input.YoutubeId, input.YoutubeUrl);
             return true;
         }
 
         [HttpPut]
         public bool UpdateTrackById([FromBody] InputTrack input)
         {
-            _repo.UpdateTrackById(input.IdTrack, input.Name, input.Image, input.Artist, input.Album, input.SpotifyId, input.SpotifyUrl);
+            _repo.UpdateTrackById(input.IdTrack, input.Name, input.Image, input.Artist, input.Album, input.SpotifyId, input.SpotifyUrl, input.YoutubeId, input.YoutubeUrl);
             return true;
         }
 

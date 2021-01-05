@@ -29,4 +29,10 @@ export class TrackService {
   update(data: any): Observable<any> {
     return this.http.put(`${baseURL}`, data);
   }
+
+  create(data: any): Observable<any> {
+    return this.http.post(`${baseURL}`, data);
+  }
+
+  
 }

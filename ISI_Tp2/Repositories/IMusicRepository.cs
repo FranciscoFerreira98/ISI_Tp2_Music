@@ -13,7 +13,7 @@ namespace ISI_Tp2.Repositories
         List<Track> GetTracksById(int id);
 
         bool UpdateTrackById(int id, string name, string image, string artist, string album, string spotifyId,
-            string spotifyUrl);
+            string spotifyUrl, string youtubeId, string youtubeUrl);
 
         Track GetFromYoutube(int id, string name);
     }

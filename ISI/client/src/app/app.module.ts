@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AllTracksComponent } from './all-tracks/all-tracks.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EditComponent } from './edit/edit.component';
     AllTracksComponent,
     DashboardComponent,
     EditComponent,
+    CreateComponent,
 
   ],
   imports: [
