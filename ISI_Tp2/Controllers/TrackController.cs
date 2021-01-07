@@ -19,6 +19,8 @@ namespace ISI_Tp2.Controllers
 
         private readonly IMusicRepository _repo;
 
+
+        //Devolve todas as musicas
         [Authorize(Roles = "admin,user")]
         [HttpGet]
         public List<Track> GetAllTracks()
@@ -27,6 +29,7 @@ namespace ISI_Tp2.Controllers
             return tracks;
         }
 
+        //pesquisar musica caso não exista na nossa bd vai procurar ao spotify a musica e insera na nossa bd
         [Authorize(Roles = "admin,user")]
         [HttpGet("{name}/{idUser}")]
         public List<Track> SearchTracks(string name,int idUser)
@@ -50,6 +53,8 @@ namespace ISI_Tp2.Controllers
             return tracks;
         }
 
+
+        //Inserir musica
         [Authorize(Roles = "admin")]
         [HttpPost]
         public bool InsertTrack([FromBody] InputTrack input)
@@ -58,6 +63,7 @@ namespace ISI_Tp2.Controllers
             return true;
         }
 
+        //Atualizar Musica
         [Authorize(Roles = "admin")]
         [HttpPut]
         public bool UpdateTrackById([FromBody] InputTrack input)
@@ -66,6 +72,7 @@ namespace ISI_Tp2.Controllers
             return true;
         }
 
+        //Apagar musica
         [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public bool DeleteTrackById(int id)

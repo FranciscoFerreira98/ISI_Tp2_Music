@@ -25,31 +25,25 @@ namespace ISI_Tp2.Controllers
         [Route("login")]
         public async Task<ActionResult<dynamic>> Authenticate([FromBody] User model)
         {
-         
+            var user = _repo.GetUser(model.Email);
 
-            
-            var user = _repo.GetUser(model.Email) ;
-
-            // Verifica se o usuário existe
+            // Verifica se o utilizador existe existe
             if (user.Email == null)
                 return NotFound(new { message = "Email ou password invalida" });
 
-            /* Fetch the stored value */
+
             string savedPasswordHash = user.Password;
-            /* Extract the bytes */
             byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
-            /* Get the salt */
+            
+            //salt é para gerar a hash
             byte[] salt = new byte[16];
             Array.Copy(hashBytes, 0, salt, 0, 16);
-            /* Compute the hash on the password the user entered */
             var pbkdf2 = new Rfc2898DeriveBytes(model.Password, salt, 100000);
             byte[] hash = pbkdf2.GetBytes(20);
-            /* Compare the results */
+            //compara os resultados
             for (int i = 0; i < 20; i++)
                 if (hashBytes[i + 16] != hash[i])
                     return NotFound(new { message = "Email ou password invalida" });
-
-          
 
             // Gera o Token
             var token = TokenService.GenerateToken(user);
@@ -65,7 +59,7 @@ namespace ISI_Tp2.Controllers
             };
         }
 
-
+        //registar utilizador e colocar a password encriptada
         [HttpPost]
         [Route("register")]
         public List<User> InsertUser([FromBody] User model)
@@ -80,9 +74,9 @@ namespace ISI_Tp2.Controllers
             Array.Copy(hash, 0, hashBytes, 16, 20);
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
 
-            List<User> user = _repo.InsertUser(model.Name,savedPasswordHash,model.Email);
+            List<User> user = _repo.InsertUser(model.Name, savedPasswordHash, model.Email);
             return user;
-            }
+        }
 
 
     }

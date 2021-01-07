@@ -94,6 +94,7 @@ namespace ISI_Tp2.Repositories
             }
         }
 
+        //Pesquisar a musica no youtube e selecionar
         public Track GetFromYoutube(int id, string name)
         {
             var response = httpClientYoutube
@@ -132,7 +133,7 @@ namespace ISI_Tp2.Repositories
 
             return track;
         }
-
+        //Procurar a musica no spotify
         public Track GetFromSpotify(string name, int idUser)
         {
             var response = httpClientSpotify.GetAsync("https://api.spotify.com/v1/search?type=track&q=" + name).Result;
@@ -184,6 +185,7 @@ namespace ISI_Tp2.Repositories
             return track;
         }
 
+        //Apagar música
         public bool DeleteTrackById(int id)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
@@ -198,6 +200,8 @@ namespace ISI_Tp2.Repositories
                 }
             }
         }
+
+        //Devolve todas as musicas da base de dados
         public List<Track> GetAllTracks()
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
@@ -229,6 +233,8 @@ namespace ISI_Tp2.Repositories
                 }
             }
         }
+
+        //Fazer Update da uma música
         public bool UpdateTrackById(int id, string name, string image, string artist, string album, string spotifyId, string spotifyUrl, string youtube_id, string youtube_url)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
@@ -252,6 +258,7 @@ namespace ISI_Tp2.Repositories
             }
         }
 
+        //Inserir uma musica
         public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string youtube_id, string youtube_url)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))

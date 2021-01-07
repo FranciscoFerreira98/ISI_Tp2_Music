@@ -58,6 +58,8 @@ namespace ISI_Tp2.Repositories
                 }
             }
         }
+
+        //GetUser para efetuar o login
         public User GetUser(string email)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))

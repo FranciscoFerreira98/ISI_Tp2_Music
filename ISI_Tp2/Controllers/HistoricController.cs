@@ -16,7 +16,7 @@ namespace ISI_Tp2.Controllers
 
         private readonly IHistoricRepository _repo;
 
-
+        //Devolve o historico do utilizador tem como parametro o id do utilizador
         [Authorize(Roles = "admin,user")]
         [HttpGet("{id}")]
         public List<Historic> GetTracksById(int id)
@@ -24,6 +24,8 @@ namespace ISI_Tp2.Controllers
             List<Historic> historics = _repo.GetHistoricByIdUser(id);
             return historics;
         }
+
+        //Apaga o historico com o historic_id como parametro
         [Authorize(Roles = "admin,user")]
         [HttpDelete("{id}")]
         public bool DeleteTrackById(int id)
