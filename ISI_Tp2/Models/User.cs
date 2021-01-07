@@ -7,9 +7,10 @@ namespace ISI_Tp2.Models
 {
     public class User
     {
-        public long IdUser { get; set; }
+        public int IdUser { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Role { get; set; }
     }
 }

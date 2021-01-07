@@ -1,0 +1,67 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            <div class="globalFooterCard" *ngFor="let historics of historic let i = index"
+                [class.active]="i == currentIndex" (click)="setActiveTrack(historics, i)">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="capaMusica" src={{tracks[i][x].image}} style="width:30px;height:30px;" alt="">
+                        {{ tracks[i][0].name }}
+                    </div>
+
+                    <div class="col-md-1">
+                        <a target="_blank" href={{tracks[i][x].spotifyUrl}}>
+                            <img class="spotifyImgHist"
+                                src="https://logodownload.org/wp-content/uploads/2020/03/listen-on-spotify.png" alt=""
+                                srcset=""></a> </div>
+                    <div class="col-md-1">
+                        <a target="_blank" href={{tracks[i][x].youtubeUrl}}>
+                            <img class="spotifyImgHist"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1200px-YouTube_Logo_2017.svg.png"
+                                alt="" srcset=""></a>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                      Data de Pesquisa:   {{ simpleDate[i] }}
+                    </div>
+                    <div class="col-md-2"> <button class="btn btn-danger" (click)="deleteTrack(historics.idHistoric)">
+                        Delete
+                      </button></div>
+                </div>
+            </div>
+        </ul>
+        <br>
+        <br>
+        
+    </div>
+    <!-- <div class="col-md-5">
+        <div *ngIf="currentHistoric">
+            <div class="globalFooterCard">
+                <h4>Informações</h4>
+                <div>
+                    <label><strong>Id da musica:</strong></label>
+                    {{ currentHistoric.trackId }}
+                </div>
+                <div>
+                    <label><strong>Nome da musica:</strong></label> {{ tracks[currentHistoric.trackId][0].name }}
+                </div>
+                <div>
+                    <label><strong>Artista:</strong></label>
+                    {{ currentHistoric.artist }}
+                </div>
+                <div>
+
+                    <a target="_blank" href={{currentTrack.spotifyUrl}}><img class="spotifyImg"
+                            src="https://logodownload.org/wp-content/uploads/2020/03/listen-on-spotify.png" alt=""
+                            srcset=""></a>
+                    <a target="_blank" href={{currentTrack.youtubeUrl}}><img class="spotifyImg"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1200px-YouTube_Logo_2017.svg.png"
+                            alt="" srcset=""></a>
+
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div> -->
+    <br>

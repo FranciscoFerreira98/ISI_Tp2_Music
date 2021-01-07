@@ -10,8 +10,12 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using ISI_Tp2.Models;
 using ISI_Tp2.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ISI_Tp2
 {
@@ -29,6 +33,9 @@ namespace ISI_Tp2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+         
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -38,7 +45,27 @@ namespace ISI_Tp2
                         ).AllowAnyMethod().AllowAnyHeader();
                     });
             });
+
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
             services.AddSingleton<IMusicRepository, MusicRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IHistoricRepository, HistoricRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -61,6 +88,7 @@ namespace ISI_Tp2
             app.UseCors(MyAllowSpecificOrigins);
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

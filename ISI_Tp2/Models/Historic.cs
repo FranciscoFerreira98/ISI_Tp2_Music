@@ -7,9 +7,9 @@ namespace ISI_Tp2.Models
 {
     public class Historic
     {
-        public long IdTrack { get; set; }
+        public int IdHistoric { get; set; }
         public DateTime Date { get; set; }
-        public long UserId { get; set; }
-        public long TrackId { get; set; }
+        public int UserId { get; set; }
+        public int TrackId { get; set; }
     }
 }

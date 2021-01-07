@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
 using ISI_Tp2.Models;
 using ISI_Tp2.Repositories;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace ISI_Tp2.Controllers
 {
@@ -19,21 +19,22 @@ namespace ISI_Tp2.Controllers
 
         private readonly IMusicRepository _repo;
 
-
+        [Authorize(Roles = "admin,user")]
         [HttpGet]
         public List<Track> GetAllTracks()
         {
             List<Track> tracks = _repo.GetAllTracks();
             return tracks;
         }
-        
-        [HttpGet("{name}")]
-        public List<Track> SearchTracks(string name)
+
+        [Authorize(Roles = "admin,user")]
+        [HttpGet("{name}/{idUser}")]
+        public List<Track> SearchTracks(string name,int idUser)
         {
-            List<Track> tracks = _repo.GetTracksByName(name);
+            List<Track> tracks = _repo.GetTracksByName(name, idUser);
             if (tracks.Count == 0)
             {
-                tracks.Add(_repo.GetFromSpotify(name));
+                tracks.Add(_repo.GetFromSpotify(name, idUser));
                 Track trackYoutube = _repo.GetFromYoutube(tracks[0].IdTrack, name);
                 tracks[0].YoutubeUrl = trackYoutube.YoutubeUrl;
                 tracks[0].YoutubeId = trackYoutube.YoutubeId;
@@ -41,6 +42,7 @@ namespace ISI_Tp2.Controllers
             return tracks;
         }
 
+        [Authorize(Roles = "admin,user")]
         [HttpGet("id/{id}")]
         public List<Track> GetTracksById(int id)
         {
@@ -48,6 +50,7 @@ namespace ISI_Tp2.Controllers
             return tracks;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public bool InsertTrack(string name, string image, string artist, string album, string spoty_id, string spoty_url, string apple_id, string apple_url)
         {
@@ -55,6 +58,7 @@ namespace ISI_Tp2.Controllers
             return true;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public bool UpdateTrackById([FromBody] InputTrack input)
         {
@@ -62,6 +66,7 @@ namespace ISI_Tp2.Controllers
             return true;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public bool DeleteTrackById(int id)
         {

@@ -6,6 +6,13 @@ body{
   width: 20%;
   margin-right: 5%;
 }
+.spotifyImgHist{
+  width: 90%;
+
+}
+.searchImgMusic{
+  width: 100%;
+}
 .my-pagination /deep/ .ngx-pagination .current {
     background: red;
   }

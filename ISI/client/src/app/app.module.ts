@@ -10,6 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AllTracksComponent } from './all-tracks/all-tracks.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HistoricComponent } from './historic/historic.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,10 @@ import { EditComponent } from './edit/edit.component';
     AllTracksComponent,
     DashboardComponent,
     EditComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent,
+    HistoricComponent,
 
   ],
   imports: [

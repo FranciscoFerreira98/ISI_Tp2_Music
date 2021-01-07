@@ -28,7 +28,7 @@ namespace ISI_Tp2.Repositories
             //httpClientYoutube.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["YoutubeApiKey"]);
         }
 
-        public List<Track> GetTracksByName(string name)
+        public List<Track> GetTracksByName(string name,int userId)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
             {
@@ -36,6 +36,7 @@ namespace ISI_Tp2.Repositories
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Name", name);
+                    command.Parameters.AddWithValue("@IdUser", userId);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     List<Track> tracks = new List<Track>();
@@ -132,7 +133,7 @@ namespace ISI_Tp2.Repositories
             return track;
         }
 
-        public Track GetFromSpotify(string name)
+        public Track GetFromSpotify(string name, int idUser)
         {
             var response = httpClientSpotify.GetAsync("https://api.spotify.com/v1/search?type=track&q=" + name).Result;
             string res = "";
@@ -164,6 +165,7 @@ namespace ISI_Tp2.Repositories
                     command.Parameters.AddWithValue("@Image", track.Image);
                     command.Parameters.AddWithValue("@Name", track.Name);
                     command.Parameters.AddWithValue("@SpotifyId", track.SpotifyId);
+                    command.Parameters.AddWithValue("@UserId", idUser);
 
 
                     connection.Open();
