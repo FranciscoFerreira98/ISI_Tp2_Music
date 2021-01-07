@@ -77,11 +77,11 @@ namespace ISI_Tp2
                     Name = "Bearer",
                     BearerFormat = "JWT",
                     Scheme = "bearer",
-                    Description = "Specify the authorization token.",
+                    Description = "Inserir o token JWT",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
                 };
-                c.AddSecurityDefinition("jwt_auth", securityDefinition);
+                c.AddSecurityDefinition("Token Jwt", securityDefinition);
 
                 // Make sure swagger UI requires a Bearer token specified
                 OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
