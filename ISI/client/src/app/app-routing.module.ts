@@ -17,12 +17,12 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'alltracks', component: AllTracksComponent },
   { path: 'dashboard', component: DashboardComponent },
-    { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'historic', component: HistoricComponent },
   { path: 'edit/:id', component: EditComponent },
-    { path: 'create', component: CreateComponent }
+  { path: 'create', component: CreateComponent }
 ];
 
 @NgModule({
