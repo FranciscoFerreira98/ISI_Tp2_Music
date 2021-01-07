@@ -58,7 +58,11 @@ export class TrackService {
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(`${baseURL}`, data);
+    const user = this.token.getUser();
+    const headers = new HttpHeaders({
+      'Authorization':'Bearer ' + user.token
+    })
+    return this.http.post(`${baseURL}`, data, {headers: headers});
   }
 
   

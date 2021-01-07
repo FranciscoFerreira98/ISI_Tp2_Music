@@ -12,6 +12,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { HistoricComponent } from './historic/historic.component';
 import {CreateComponent} from './create/create.component';
 
+import { BrowserModule } from '@angular/platform-browser';
+
 
 const routes: Routes = [
   { path: 'search', component: SearchComponent },
@@ -27,7 +29,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),CommonModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -69,7 +69,7 @@ namespace ISI_Tp2.Controllers
         [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public bool DeleteTrackById(int id)
-        {
+        {   
             _repo.DeleteTrackById(id);
             return true;
         }

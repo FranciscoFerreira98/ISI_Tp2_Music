@@ -9,14 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CreateComponent implements OnInit {
   music = {
-  name: '',
-  image: '',
-  artist: '',
-  album: '',
-  spotifyId: '',
-  spotifyUrl: '',
-  youtubeId: '',
-  youtubeUrl: '',
+    name: '',
+    image: '',
+    artist: '',
+    album: '',
+    spotifyId: '',
+    spotifyUrl: '',
+    youtubeId:'',
+    youtubeUrl:''
   }
 
   constructor(
@@ -30,23 +30,23 @@ export class CreateComponent implements OnInit {
   saveTrack() {
     const data = {
       name: this.music.name,
-  image: this.music.image,
-  artist: this.music.artist,
-  album: this.music.album,
-  spotifyId: this.music.spotifyId,
-  spotifyUrl: this.music.spotifyUrl,
-  youtubeId: this.music.youtubeId,
-  youtubeUrl: this.music.youtubeUrl,
+      image: this.music.image,
+      artist: this.music.artist,
+      album: this.music.album,
+      spotifyId: this.music.spotifyId,
+      spotifyUrl: this.music.spotifyUrl,
+      youtubeId: this.music.youtubeId,
+      youtubeUrl: this.music.youtubeUrl
     };
     this.trackService.create(data)
     .subscribe(
       response => {
+        console.log(data);
         console.log(response);
-        this.router.navigate(['/dashboard']);
+        // this.router.navigate(['/dashboard']);
       },
       error => {
         console.log(error);
       });
   }
-
 }

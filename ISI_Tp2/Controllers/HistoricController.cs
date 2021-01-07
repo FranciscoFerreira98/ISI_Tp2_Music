@@ -17,14 +17,14 @@ namespace ISI_Tp2.Controllers
         private readonly IHistoricRepository _repo;
 
 
-        //[Authorize(Roles = "admin,user")]
+        [Authorize(Roles = "admin,user")]
         [HttpGet("{id}")]
         public List<Historic> GetTracksById(int id)
         {
             List<Historic> historics = _repo.GetHistoricByIdUser(id);
             return historics;
         }
-        //[Authorize(Roles = "admin,user")]
+        [Authorize(Roles = "admin,user")]
         [HttpDelete("{id}")]
         public bool DeleteTrackById(int id)
         {
