@@ -71,7 +71,7 @@ namespace ISI_Tp2
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ISI_Tp2", Version = "v1" });
-                // Bearer token authentication
+                // Bearer token 
                 OpenApiSecurityScheme securityDefinition = new OpenApiSecurityScheme()
                 {
                     Name = "Bearer",
@@ -81,14 +81,14 @@ namespace ISI_Tp2
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
                 };
-                c.AddSecurityDefinition("Token Jwt", securityDefinition);
+                c.AddSecurityDefinition("token_jwt", securityDefinition);
 
                 // Make sure swagger UI requires a Bearer token specified
                 OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
                 {
                     Reference = new OpenApiReference()
                     {
-                        Id = "jwt_auth",
+                        Id = "token_jwt",
                         Type = ReferenceType.SecurityScheme
                     }
                 };
