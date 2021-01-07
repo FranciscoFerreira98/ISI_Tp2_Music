@@ -229,7 +229,7 @@ namespace ISI_Tp2.Repositories
                 }
             }
         }
-        public bool UpdateTrackById(int id, string name, string image, string artist, string album, string spotifyId, string spotifyUrl)
+        public bool UpdateTrackById(int id, string name, string image, string artist, string album, string spotifyId, string spotifyUrl, string youtube_id, string youtube_url)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MusicDb")))
             {
@@ -243,6 +243,8 @@ namespace ISI_Tp2.Repositories
                     command.Parameters.AddWithValue("@Album", album);
                     command.Parameters.AddWithValue("@SpotifyId", spotifyId);
                     command.Parameters.AddWithValue("@SpotifyUrl", spotifyUrl);
+                    command.Parameters.AddWithValue("@YoutubeId", youtube_id);
+                    command.Parameters.AddWithValue("@YoutubeUrl", youtube_url);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     return true;

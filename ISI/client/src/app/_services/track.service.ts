@@ -56,4 +56,10 @@ export class TrackService {
     })
     return this.http.put(`${baseURL}`, data, {headers: headers});
   }
+
+  create(data: any): Observable<any> {
+    return this.http.post(`${baseURL}`, data);
+  }
+
+  
 }

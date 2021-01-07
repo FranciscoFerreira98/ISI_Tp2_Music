@@ -14,7 +14,7 @@ namespace ISI_Tp2.Models
         public string Album { get; set; }
         public string SpotifyId { get; set; }
         public string SpotifyUrl { get; set; }
-        public string AppleId { get; set; }
-        public string AppleUrl { get; set; }
+        public string YoutubeId { get; set; }
+        public string YoutubeUrl { get; set; }
     }
 }

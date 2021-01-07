@@ -1,0 +1,63 @@
+    <div class="row ">
+      <div class="col-md-6 globalFooterCard">
+        <form>
+          
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="title">Nome da Música</label>
+              <input type="text" class="form-control" id="title" [(ngModel)]="music.name" name="title" />
+            </div>
+  
+            <div class="form-group  col-md-6">
+              <label for="artist">Artista</label>
+              <input type="text" class="form-control" id="artist" [(ngModel)]="music.artist" name="artist" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="album">Album</label>
+              <input type="text" class="form-control" id="album" [(ngModel)]="music.album" name="album" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="image">Image</label>
+              <input type="text" class="form-control" id="image" [(ngModel)]="music.image" name="image" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="spotifyId">Spotify Id</label>
+              <input type="text" class="form-control" id="spotifyId" [(ngModel)]="music.spotifyId"
+                name="spotifyId" />
+            </div>
+  
+            <div class="form-group  col-md-6">
+              <label for="spotifyUrl">Spotify Url</label>
+              <input type="text" class="form-control" id="spotifyUrl" [(ngModel)]="music.spotifyUrl"
+                name="spotifyUrl" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="youtubeId">Youtube Id</label>
+              <input type="text" class="form-control" id="youtubeId" [(ngModel)]="music.youtubeId"
+                name="youtubeId" />
+            </div>
+  
+            <div class="form-group  col-md-6">
+              <label for="youtubeUrl">Youtube Url</label>
+              <input type="text" class="form-control" id="youtubeUrl" [(ngModel)]="music.youtubeUrl"
+                name="youtubeUrl" />
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-2">
+            <button class="btn btn-primary" (click)="saveTrack()">
+              Criar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
