@@ -1,16 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using ISI_Tp2.Models;
 using ISI_Tp2.Repositories;
 using ISI_Tp2.Services;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ISI_Tp2.Controllers
 {
+
+    /* ################# Métedos #################
+     * Controller para o registo e o login e onde geramos o JWT Token
+     * 
+     * POST -> Login ger o o token JWT
+     * POST -> Registo Criar Conta
+     */
+
     [Route("api/auth")]
     public class HomeController : ControllerBase
     {

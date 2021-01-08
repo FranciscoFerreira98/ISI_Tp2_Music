@@ -1,18 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using Swashbuckle.AspNetCore.Swagger;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ISI_Tp2.Models;
 using ISI_Tp2.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -35,8 +27,9 @@ namespace ISI_Tp2
         public void ConfigureServices(IServiceCollection services)
         {
 
-         
 
+            //############# CORS #####################
+            //Ativar os cors -> Cross-Origin Resource Sharing para a porta 8081
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -64,14 +57,20 @@ namespace ISI_Tp2
                     ValidateAudience = false
                 };
             });
+
+
+            //########### REPOSITORIOS #########
+            //Adicionar os repositorios criados
             services.AddSingleton<IMusicRepository, MusicRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IHistoricRepository, HistoricRepository>();
             services.AddControllers();
+
+            //########### SWAGGER ##############
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ISI_Tp2", Version = "v1" });
-                // Bearer token 
+                // Para podermos inserir o token no swagger
                 OpenApiSecurityScheme securityDefinition = new OpenApiSecurityScheme()
                 {
                     Name = "Bearer",
@@ -113,6 +112,8 @@ namespace ISI_Tp2
             }
 
             app.UseHttpsRedirection();
+
+            //##### CORS #######
             app.UseCors(MyAllowSpecificOrigins);
             app.UseRouting();
 

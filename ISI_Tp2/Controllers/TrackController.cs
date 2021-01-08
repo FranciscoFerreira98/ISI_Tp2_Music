@@ -1,7 +1,5 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Security.Claims;
 using ISI_Tp2.Models;
 using ISI_Tp2.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +7,18 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ISI_Tp2.Controllers
 {
+
+    /* ################ Métodos ######################
+     * Controller para as músicas 
+     * GET -> Retornar todas as musicas da base de dados
+     * GET -> Procurar musica pelo nome
+     * GET -> Procurar pelo id da música
+     * POST -> Insere música manualmente
+     * PUT -> Editar música já criada 
+     * DELETE -> Apagar musica
+     */
+
+
     [Route("api/[controller]")]
     public class TrackController : ControllerBase
     {
@@ -45,6 +55,7 @@ namespace ISI_Tp2.Controllers
             return tracks;
         }
 
+        //Procurar musica pelo ID
         [Authorize(Roles = "admin,user")]
         [HttpGet("id/{id}")]
         public List<Track> GetTracksById(int id)
@@ -80,10 +91,6 @@ namespace ISI_Tp2.Controllers
             _repo.DeleteTrackById(id);
             return true;
         }
-
-
-
-
 
     }
 }
