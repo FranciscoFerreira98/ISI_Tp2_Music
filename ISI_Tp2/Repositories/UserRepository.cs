@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using ISI_Tp2.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -20,14 +15,6 @@ namespace ISI_Tp2.Repositories
             _configuration = configuration;
         }
 
-
-//        public static User Get(string name, string password)
-//        {
-//            var users = new List<User>();
-//            users.Add(new User { IdUser = 1, Name = "francis", Email = "franciscoferreir@hotmail.com", Password = "francis", Role = "Admin" });
-//;
-//            return users.Where(x => x.Name.ToLower() == name.ToLower() && x.Password == x.Password).FirstOrDefault();
-//        }
 
         public List<User> InsertUser(string name,  string password, string email)
         {

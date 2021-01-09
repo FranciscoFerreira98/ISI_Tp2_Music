@@ -26,6 +26,7 @@ export class TrackService {
 
     return this.http.get(`${baseURL}/${name}/${user.user.idUser}`,{headers: headers});
   }
+
   getAllTrack(){
     const user = this.token.getUser();
     const headers = new HttpHeaders({
@@ -33,6 +34,7 @@ export class TrackService {
     })
     return this.http.get(`${baseURL}`, {headers: headers});
   }
+  
   get(id: any): Observable<Track>{
     const user = this.token.getUser();
     const headers = new HttpHeaders({

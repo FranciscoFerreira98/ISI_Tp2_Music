@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {TrackService} from '../_services/track.service';
 
 @Component({
@@ -12,13 +13,17 @@ export class SearchComponent implements OnInit {
   musics = [];
   currentTrack = null;
   currentIndex = -1;
+ 
 
-  constructor(private trackService : TrackService) { }
+  constructor(
+    private trackService : TrackService
+    ) { }
  
   ngOnInit() {
    
     }
-    
+  
+
     refreshList(): void {
       this.getAllTrack();
       this.currentTrack = null;

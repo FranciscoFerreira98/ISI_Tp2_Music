@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TrackService} from '../_services/track.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +9,15 @@ import {TrackService} from '../_services/track.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private trackService : TrackService) { }
+  constructor(private trackService : TrackService,
+    private tokenStorageService: TokenStorageService
+    ) { }
   
+  private roles: string[];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  name: string;
   track = '';
   tracks: any
   musics = [];
@@ -19,8 +27,21 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
      this.getAllTrack();
+      
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.user.role;
+
+      this.showAdminBoard = this.roles.includes('admin');
+      this.showModeratorBoard = this.roles.includes('user');
+
+      this.name = user.user.email;
+      console.log(this.name);
      
     }
+  }
     
     refreshList(): void {
       this.getAllTrack();
