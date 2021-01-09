@@ -1,7 +1,4 @@
-﻿/// MusicRepository
-/// Métedos
-/// Francisco Ferreira
-
+﻿
 using System.Collections.Generic;
 using System.Data;
 using System.Net.Http;
