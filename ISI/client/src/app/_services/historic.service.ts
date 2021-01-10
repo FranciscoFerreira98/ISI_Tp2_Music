@@ -5,8 +5,8 @@ import { Historic } from 'src/app/models/historic.model';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Track } from 'src/app/models/track.model';
 
-const baseURL = "https://localhost:44306/api/Historic";
-const searchUrl = "https://localhost:44306/api/Track/id";
+const baseURL = "https://isitp220210110134451.azurewebsites.net/api/Historic";
+const searchUrl = "https://isitp220210110134451.azurewebsites.net/api/Track/id";
 
 
 @Injectable({
